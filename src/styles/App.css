@@ -1,0 +1,39 @@
+.cont {
+    text-align: center;
+}
+
+#head {
+    font-size: 50px;
+}
+
+#sub-head {
+    font-size: 30px;
+}
+
+.link {
+    font-size: 20px;
+}
+
+.col {
+    float: left;
+    width: 50%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.row {
+    padding-bottom: 50px;
+}
+
+.stats {
+    text-align: left;
+}
+
+.form {
+    padding-bottom: 50px;
+}
