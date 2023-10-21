@@ -3,7 +3,7 @@ import { ParallelCoordinateFilled } from "../tools/ParallelCoordinateFilled";
 
 import { useState } from "react";
 
-import { grades, GradeData, students, StudentData } from "../mock_data/data";
+import { GradeData, students, StudentData, GradeDataItem } from "../mock_data/data";
 
 import '../styles/Performance.css';
 
@@ -196,7 +196,6 @@ export default function Performance() {
             };
 
             onlyGrades.push(gradeItem);
-
         });
 
         return onlyGrades;
@@ -211,13 +210,6 @@ export default function Performance() {
                 height={600}
                 variables={["hw1", "quiz1", "hw2", "exam1"]}
             />
-        )
-    }
-
-    const table = () => {
-
-        return (
-            <p>hello</p>
         )
     }
 
@@ -359,8 +351,33 @@ export default function Performance() {
                     Either
                 </label>
 
+                <br></br>
+
+                <button id="reset-button" onClick={() => { window.location.reload() }}>Reset Filters</button>
+
             </>
         )
+    }
+
+    function getHeaders() {
+
+        const student: any = students[0];
+
+        const headings: any[] = [];
+
+        for (const field in student) {
+
+            if (field === "id") {
+
+                headings.push(field);
+            }
+            else if (typeof student[field] === 'number') {
+
+                headings.push(field);
+            }
+        }
+
+        return headings;
     }
 
     return (
@@ -386,9 +403,36 @@ export default function Performance() {
             </div>
 
             <div id="table">
-                { table() }
+                <table>
+                    <thead>
+                        <tr>
+                            {
+                                getHeaders().map((header) => {
+
+                                    return <th>{header}</th>
+                                })
+                            }
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+
+                            filterStudents(students, filterState).map((student: any) => {
+
+                                return (
+                                    <tr className="students">
+                                        <td>{student.id}</td>
+                                        <td>{student.hw1}</td>
+                                        <td>{student.hw2}</td>
+                                        <td>{student.quiz1}</td>
+                                        <td>{student.exam1}</td>
+                                    </tr>
+                                )
+                            })
+                        }
+                    </tbody>
+                </table>
             </div>
-        </div>
-               
+        </div>    
     )
-};
+}

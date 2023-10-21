@@ -14,7 +14,7 @@ type StudentDataItem<T extends string> = {
   exam1: number
 }
 
-type GradeDataItem<T extends string> = {
+export type GradeDataItem<T extends string> = {
   hw1: number,
   quiz1: number,
   hw2: number,
