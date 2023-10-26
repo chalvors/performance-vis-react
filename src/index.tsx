@@ -6,7 +6,7 @@ import reportWebVitals from "./tools/reportWebVitals";
 import Layout from "./pages/Layout";
 import Performance from "./pages/Performance";
 import NoPage from "./pages/NoPage";
-import { useEffect } from "react";
+import Contact from "./pages/Contact";
 
 
 export default function App() {
@@ -16,6 +16,8 @@ export default function App() {
                 <Route path="/" element={<Layout />}>
                     
                     <Route index element={<Performance />} />
+                    <Route path="contact/:id" element={<Contact /> } />
+
                     <Route path="*" element={<NoPage />} />
 
                 </Route>

@@ -5,6 +5,8 @@ import { useState } from "react";
 
 import { GradeData, students, StudentData, GradeDataItem } from "../mock_data/data";
 
+import { Link } from "react-router-dom";
+
 import '../styles/Performance.css';
 
 export default function Performance() {
@@ -380,6 +382,8 @@ export default function Performance() {
             }
         }
 
+        headings.push("Contact");
+
         return headings;
     }
 
@@ -468,6 +472,8 @@ export default function Performance() {
         return title;
     }
 
+
+
     return (
 
         <div id="content">
@@ -518,6 +524,11 @@ export default function Performance() {
                                         <td>{student.hw2}</td>
                                         <td>{student.quiz1}</td>
                                         <td>{student.exam1}</td>
+                                        <td>
+                                            <Link to={"contact/" + student.id}>
+                                                <button id="contact-button">Contact Student</button>
+                                            </Link>
+                                        </td>
                                     </tr>
                                 )
                             })
