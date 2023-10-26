@@ -9,12 +9,14 @@ import '../styles/Performance.css';
 
 export default function Performance() {
 
+    var count = 0;                                              // count for key generation
+
     const [studentBase, setStudentBase] = useState("all");      // all, atRisk
-    const [ethnicity, setEthnicity] = useState("either");       // either, white, notWhite
-    const [gender, setGender] = useState("either");             // either, male, female
+    const [ethnicity, setEthnicity] = useState("either");       // either, White, Not_White
+    const [gender, setGender] = useState("either");             // either, Male, Female
     const [lgbtq, setLgbtq] = useState("either");               // either, true, false
     const [disabled, setDisabled] = useState("either");         // either, true, false
-    const [upbringing, setUpbringing] = useState("either");     // either, rural, urban
+    const [upbringing, setUpbringing] = useState("either");     // either, Rural, Urban
         
 
     const filterState = {
@@ -28,6 +30,7 @@ export default function Performance() {
 
     function studentIsAtRisk(student: any) {
 
+        // if last assignment was an F
         if (student[Object.keys(student)[Object.keys(student).length - 1]] < 60) {
 
             return true;
@@ -334,13 +337,13 @@ export default function Performance() {
                 <p><b>Upbringing: </b></p>
 
                 <label >
-                    <input type="radio" name="upbringing" onClick={() => { setUpbringing("urban") }} />
+                    <input type="radio" name="upbringing" onClick={() => { setUpbringing("Urban") }} />
 
                     Urban
                 </label>
 
                 <label >
-                    <input type="radio" name="upbringing" onClick={() => { setUpbringing("rural") }} />
+                    <input type="radio" name="upbringing" onClick={() => { setUpbringing("Rural") }} />
 
                     Rural
                 </label>
@@ -380,11 +383,100 @@ export default function Performance() {
         return headings;
     }
 
+    function generateKey() {
+
+        count++;
+        return count;
+    }
+
+    function getTitle() {
+
+        var title = "";
+
+        if (filterState.studentBase === "all") {
+
+            title = "All ";
+        }
+        else {
+
+            title = "At Risk ";
+        }
+
+
+        switch (filterState.ethnicity) {
+
+            case "White":
+                title += "White ";
+                break;
+
+            case "Not_White":
+                title += "Non-White ";
+                break
+          
+        }
+
+        switch (filterState.gender) {
+
+            case "Male":
+                title += "Male ";
+                break;
+
+            case "Female":
+                title += "Female ";
+                break
+
+        }
+
+        switch (filterState.lgbtq) {
+
+            case "true":
+                title += "LGBTQ ";
+                break;
+
+            case "false":
+                title += "Non-LQBTQ ";
+                break
+
+        }
+
+        switch (filterState.disabled) {
+
+            case "true":
+                title += "Disabled ";
+                break;
+
+            case "false":
+                title += "Non-Disabled ";
+                break
+
+        }
+
+        switch (filterState.upbringing) {
+
+            case "Rural":
+                title += "Rural ";
+                break;
+
+            case "Urban":
+                title += "Urban ";
+                break
+
+        }
+
+        title += "Students";
+
+        return title;
+    }
+
     return (
 
         <div id="content">
 
             <div id="graph-and-filters">
+
+                <div id="title">
+                    <p><b>{ getTitle() }</b></p>
+                </div>
 
                 <div id="parallel-graph">
                     { parallelGraph() }
@@ -409,7 +501,7 @@ export default function Performance() {
                             {
                                 getHeaders().map((header) => {
 
-                                    return <th>{header}</th>
+                                    return <th key={generateKey()}>{header}</th>
                                 })
                             }
                         </tr>
@@ -420,7 +512,7 @@ export default function Performance() {
                             filterStudents(students, filterState).map((student: any) => {
 
                                 return (
-                                    <tr className="students">
+                                    <tr className="students" key={generateKey()}>
                                         <td>{student.id}</td>
                                         <td>{student.hw1}</td>
                                         <td>{student.hw2}</td>

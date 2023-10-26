@@ -1,6 +1,6 @@
 
 #graph-and-filters {
-    height: 600px;
+    height: 700px;
     width: 1350px;
     outline: 3px solid black;
     margin-left: 24px;
@@ -9,7 +9,7 @@
 
 #parallel-graph {
     width: 1000px;
-    height: 600px;
+    height: 700px;
     float: left;
 
 }
@@ -19,7 +19,7 @@
     border-left: 3px solid black;
     margin-left: 24px;
     padding-left: 24px;
-    height: 600px;
+    height: 610px;
 }
 
 
@@ -59,4 +59,12 @@ table, th, td {
     background-color: white;
     color: black;
     border: 2px solid #008CBA; 
+}
+
+#title {
+    text-align: center;
+    outline: 3px solid black;
+    padding: 8px;
+    font-size: 24px;
+    
 }
